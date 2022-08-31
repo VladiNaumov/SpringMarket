@@ -30,7 +30,9 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public  List<Product>priceMinMax(){
-        return productRepository.findAllByPriceBetween(1.0, 5.0);
+    public  List<Product>findPriceMinMax(Double min, Double max){
+        return productRepository.findAllByPriceBetween(min, max);
     }
+
+
 }

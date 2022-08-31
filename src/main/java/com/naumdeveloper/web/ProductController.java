@@ -21,7 +21,6 @@ public class ProductController {
     @GetMapping("/market/findId/{id}")
     public Product finfId(@PathVariable Long id){
         return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
-
     }
 
     @GetMapping("/market/delete/{id}")
@@ -29,12 +28,13 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-    @GetMapping("/market/price")
-    public  List<Product> deleteById() {
-       return productService.priceMinMax();
+
+    @GetMapping("/market/ptodots_between")
+    public List<Product> findSProdoctsByScoreBetween(@RequestParam(defaultValue = "0") Double min, @RequestParam(defaultValue = "100") Double max) {
+        return productService.findPriceMinMax(min, max);
     }
 
-    // GET http://localhost:8189/app/products?productId=1&delta=20
+    // GET http://localhost:8189/app/products?name=1&price=20
     @PostMapping("/products")
     public void addNewProduct(@RequestBody Product product) {
         productService.add(product);
@@ -45,7 +45,5 @@ public class ProductController {
     public Integer helloWork(@RequestParam Integer a, @RequestParam Integer b) {
         return  a + b ;
     }
-
-
 
 }
