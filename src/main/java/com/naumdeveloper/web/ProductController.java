@@ -27,7 +27,7 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-    @GetMapping("/market/price/")
+    @GetMapping("/market/price")
     public  List<Product> deleteById() {
        return productService.priceMinMax();
     }
