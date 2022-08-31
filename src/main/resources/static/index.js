@@ -8,6 +8,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
+
     $scope.deleteProduct = function (productId) {
         $http.get(contextPath + '/market/delete/' + productId)
             .then(function (response) {

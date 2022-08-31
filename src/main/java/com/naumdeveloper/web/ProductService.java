@@ -25,15 +25,11 @@ public class ProductService {
     }
 
 
-    public void changeDiscount(Long productId, Integer delta) {
-        // Product product = productRepository.findById(productId);
-        // product.setDiscount(product.getDiscount() + delta);
-        // studentRepository.save(student);
-
-    }
-
-
     public void add(Product product) {
         productRepository.save(product);
+    }
+
+    public  List<Product>priceMinMax(){
+        return productRepository.findAllByPriceBetween(1.0, 5.0);
     }
 }

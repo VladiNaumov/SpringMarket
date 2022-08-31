@@ -27,6 +27,10 @@ public class ProductController {
         productService.deleteById(id);
     }
 
+    @GetMapping("/market/price/")
+    public  List<Product> deleteById() {
+       return productService.priceMinMax();
+    }
 
     // GET http://localhost:8189/app/products?productId=1&delta=20
     @PostMapping("/products")
