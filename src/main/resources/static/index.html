@@ -21,25 +21,28 @@
             <td>ID</td>
             <td>Имя продукта</td>
             <td>Hinta</td>
-            <td>Скидка</td>
-            <td>Действие</td>
+            <td>действие</td>
+
         </tr>
         <tbody>
         <tr ng-repeat="s in ProductList">
             <td>{{s.id}}</td>
             <td>{{s.name}}</td>
             <td>{{s.price}}</td>
-            <td>{{s.summa}}</td>
+
 
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Исключить</button>
             </td>
+            <!--
             <td>
                 <button class="btn btn-primary" ng-click="changeScore(s.id, -5)">-</button>
                 {{s.discount}}
                 <button class="btn btn-primary" ng-click="changeScore(s.id, 5)">+</button>
 
             </td>
+            -->
+
 
         </tr>
         </tbody>

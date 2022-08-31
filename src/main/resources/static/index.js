@@ -1,8 +1,8 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/app/';
+    const contextPath = 'http://localhost:8189/app';
 
     $scope.loadProduct = function () {
-        $http.get(contextPath + '/market')
+        $http.get(contextPath + '/market/')
             .then(function (response) {
                 $scope.ProductList = response.data;
             });
@@ -17,7 +17,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
     $scope.changeScore = function (productId, delta) {
         $http({
-            url: contextPath + '/market/change_discount',
+            url: contextPath + '/market/change_discount/',
             method: 'POST',
             params: {
                 productId: productId,
