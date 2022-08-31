@@ -1,5 +1,6 @@
 package com.naumdeveloper.web;
 
+import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,9 @@ public class ProductController {
     }
 
     @GetMapping("/market/findId/{id}")
-    public void finfId(@PathVariable Long id){
-        productService.finfById(id);
+    public Product finfId(@PathVariable Long id){
+        return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
+
     }
 
     @GetMapping("/market/delete/{id}")
