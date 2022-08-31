@@ -17,6 +17,11 @@ public class ProductController {
         return productService.getAllProdukts();
     }
 
+    @GetMapping("/market/findId/{id}")
+    public void finfId(@PathVariable Long id){
+        productService.finfById(id);
+    }
+
     @GetMapping("/market/delete/{id}")
     public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);

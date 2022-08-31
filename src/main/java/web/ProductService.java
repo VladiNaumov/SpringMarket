@@ -16,8 +16,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void finfById(String name){
-        productRepository.findByName(name);
+    public void finfById(Long id){
+        productRepository.findById(id);
     }
 
     public void deleteById(Long id) {
@@ -26,14 +26,14 @@ public class ProductService {
 
 
     public void changeDiscount(Long productId, Integer delta) {
-       // Product product = productRepository.findById(productId);
-       // product.setDiscount(product.getDiscount() + delta);
-
+        // Product product = productRepository.findById(productId);
+        // product.setDiscount(product.getDiscount() + delta);
         // studentRepository.save(student);
 
     }
 
     public void add(Product product) {
+        productRepository.save(product);
 
 
     }
