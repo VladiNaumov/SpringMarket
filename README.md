@@ -1,2 +1,2 @@
 # SpringMarket
-Используется Spring boot RestApi and Angular configuration 
+Используется Spring boot RestApi, Hibernate JpaRepository and Angular configuration
