@@ -28,4 +28,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "select score from product where name = :name", nativeQuery = true)
     Integer nativeSqlGetScoreByName(String name);
 
+
 }
