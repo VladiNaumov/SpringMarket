@@ -18,15 +18,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Optional<Product> findById(Long id);
 
 
-    /* действие пример выполнения нативных запросов  */
-    @Query("select s from Product s where s.score < 20")
-    List<Product> findLowRatingProducs();
-
-    @Query("select s.price from Product s where s.name = ?1")
-    Integer hqlGetScoreByName(String name);
-
-    @Query(value = "select score from product where name = :name", nativeQuery = true)
-    Integer nativeSqlGetScoreByName(String name);
 
 
 }
