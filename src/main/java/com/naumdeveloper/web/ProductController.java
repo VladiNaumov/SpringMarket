@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     // GET http://localhost:8189/app/hello?a=10&b=20
-    @GetMapping("/hello")
+    @GetMapping("/summa")
     public Integer helloWork(@RequestParam Integer a, @RequestParam Integer b) {
         return  a + b ;
     }
