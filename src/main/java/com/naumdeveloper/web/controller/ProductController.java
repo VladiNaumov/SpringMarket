@@ -1,6 +1,10 @@
-package com.naumdeveloper.web;
+package com.naumdeveloper.web.controller;
 
+import com.naumdeveloper.web.dto.ProductDto;
+import com.naumdeveloper.web.service.ProductService;
+import com.naumdeveloper.web.entities.Product;
 import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +15,21 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping
+    public Page<ProductDto> getAllStudents(
+            @RequestParam(name = "p", defaultValue = "1") Integer page,
+            @RequestParam(name = "min_score", required = false) Integer minScore,
+            @RequestParam(name = "max_score", required = false) Integer maxScore,
+            @RequestParam(name = "name_part", required = false) String namePart
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        return productService.find(minScore, maxScore, namePart, page).map(
+                s -> new ProductDto(s)
+        );
     }
 
     @GetMapping("/market")

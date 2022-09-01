@@ -1,4 +1,4 @@
-package com.naumdeveloper.web;
+package com.naumdeveloper.web.controller;
 
 
 import com.naumdeveloper.web.dto.ResultDto;

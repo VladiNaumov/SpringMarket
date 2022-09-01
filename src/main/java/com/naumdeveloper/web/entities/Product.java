@@ -1,4 +1,4 @@
-package com.naumdeveloper.web;
+package com.naumdeveloper.web.entities;
 
 import javax.persistence.*;
 

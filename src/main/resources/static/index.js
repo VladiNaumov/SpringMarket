@@ -32,8 +32,6 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
-
-
     $scope.createProductJson() = function () {
         console.log($scope.newProductJson);
         $http.post(contextPath + '/market', $scope.newProductJson)
@@ -43,20 +41,20 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         }
 
 
-        $scope.sumTwoNumbers = function () {
-            console.log($scope.calcAdd);
-            $http({
+    $scope.sumTwoNumbers = function () {
+        console.log($scope.calcAdd);
+        $http({
                 url: contextPath + '/calc/add',
                 method: 'get',
                 params: {
                     a: $scope.calcAdd.a,
                     b: $scope.calcAdd.b
                 }
-            }).then(function (response) {
+        }).then(function (response) {
                 alert('Сумма равна ' + response.data.value);
                 $scope.calcAdd.a = null;
                 $scope.calcAdd.b = null;
-            });
+           });
         }
 
     $scope.loadProduct();
