@@ -13,19 +13,20 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/market/")
+    @GetMapping("/market")
     public List<Product> getAllProdukts() {
         return productService.getAllProdukts();
     }
 
     // GET http://localhost:8189/app/products?name=1&price=20
-    @PostMapping("/products")
+    @PostMapping("/market")
     public void addNewProduct(@RequestBody Product product) {
-        productService.add(product);
+        productService.productServiceSave(product);
     }
 
+
     @GetMapping("/market/ptodots_between")
-    public List<Product> findSProdoctsByScoreBetween(@RequestParam(defaultValue = "0") Double min, @RequestParam(defaultValue = "100") Double max) {
+    public List<Product> findSProdoctsByPriceBetween(@RequestParam(defaultValue = "0") Double min, @RequestParam(defaultValue = "100") Double max) {
         return productService.findPriceMinMax(min, max);
     }
 

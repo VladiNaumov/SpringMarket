@@ -46,9 +46,7 @@ public class Product {
     }
 
     public void setPrice(Double price) {
-        if(price > 0){
-            this.price = price;
-        }
+
     }
 
     public Product() {
@@ -57,8 +55,8 @@ public class Product {
     public Product(String name, Double price) {
         this.name = name;
         this.price = price;
-        this.discount = 0;
     }
+
 
     @Override
     public String toString() {
