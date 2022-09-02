@@ -1,6 +1,5 @@
 package com.naumdeveloper.web.controller;
 
-import com.naumdeveloper.web.dto.ProductDto;
 import com.naumdeveloper.web.service.ProductService;
 import com.naumdeveloper.web.entities.Product;
 import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
