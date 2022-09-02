@@ -18,23 +18,22 @@ public class ProductController {
     }
 
 
-    /*
+
     @GetMapping
-    public Page<ProductDto> getAllStudents(
+    public Page<Product> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
-            @RequestParam(name = "min_score", required = false) Integer minScore,
-            @RequestParam(name = "max_score", required = false) Integer maxScore,
+            @RequestParam(name = "min_price", required = false) Integer minScore,
+            @RequestParam(name = "max_price", required = false) Integer maxScore,
             @RequestParam(name = "name_part", required = false) String namePart
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productService.find(minScore, maxScore, namePart, page).map(
-                s -> new ProductDto(s)
-        );
+        return productService.find(minScore, maxScore, namePart, page);
+
     }
 
-     */
+
 
     @GetMapping("/market")
     public List<Product> getAllProdukts() {
@@ -43,7 +42,7 @@ public class ProductController {
 
     @PostMapping("/market")
     public void addNewProduct(@RequestBody Product product) {
-          productService.productServiceSave(product);
+        productService.productServiceSave(product);
     }
 
 

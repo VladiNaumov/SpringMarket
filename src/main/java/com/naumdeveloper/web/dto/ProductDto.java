@@ -4,6 +4,8 @@ package com.naumdeveloper.web.dto;
 import com.naumdeveloper.web.entities.Product;
 
 public class ProductDto {
+
+    /*
     private Long id;
     private String name;
     private Double price;
@@ -40,4 +42,6 @@ public class ProductDto {
 
     public ProductDto() {
     }
+    
+     */
 }
