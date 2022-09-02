@@ -17,6 +17,8 @@ public class ProductController {
         this.productService = productService;
     }
 
+
+    /*
     @GetMapping
     public Page<ProductDto> getAllStudents(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
@@ -32,15 +34,16 @@ public class ProductController {
         );
     }
 
+     */
+
     @GetMapping("/market")
     public List<Product> getAllProdukts() {
         return productService.getAllProdukts();
     }
 
-    // GET http://localhost:8189/app/products?name=1&price=20
     @PostMapping("/market")
     public void addNewProduct(@RequestBody Product product) {
-        productService.productServiceSave(product);
+          productService.productServiceSave(product);
     }
 
 

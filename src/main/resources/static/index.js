@@ -4,7 +4,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     // console.log(123);
 
     $scope.loadProduct = function () {
-        $http.get(contextPath + '/market/')
+        $http.get(contextPath + '/market')
             .then(function (response) {
             // console.log(response.data)
                 $scope.ProductList = response.data;
@@ -32,13 +32,14 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
-    $scope.createProductJson() = function () {
-        console.log($scope.newProductJson);
-        $http.post(contextPath + '/market', $scope.newProductJson)
+
+     $scope.createProductJson = function () {
+            console.log($scope.newProductJson);
+            $http.post(contextPath + '/market', $scope.newProductJson)
                 .then(function (response) {
                     $scope.loadProduct();
                 });
-        }
+     }
 
 
     $scope.sumTwoNumbers = function () {

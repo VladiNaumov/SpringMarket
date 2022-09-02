@@ -16,11 +16,15 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "discount")
-    private Integer discount;
+    public Product() {
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -31,40 +35,11 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        if(discount < 100 && discount > -1 ){
-            this.discount = discount;
-        }
-    }
-
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
-
-    }
-
-    public Product() {
-    }
-
-    public Product(String name, Double price) {
-        this.name = name;
         this.price = price;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                '}';
     }
 }
