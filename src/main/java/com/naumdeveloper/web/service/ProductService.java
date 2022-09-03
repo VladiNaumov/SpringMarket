@@ -19,16 +19,20 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<Product> find(Integer minScore, Integer maxScore, String partName, Integer page) {
+    public Page<Product> find(Integer minPrice, Integer maxPrice, String partName, Integer page) {
         Specification<Product> spec = Specification.where(null);
-        if (minScore != null) {
-            spec = spec.and(ProductSpecifications.scoreGreaterOrEqualsThan(minScore));
+        // select s from Product s where true
+        if (minPrice != null) {
+            spec = spec.and(ProductSpecifications.scoreGreaterOrEqualsThan(minPrice));
+            //select s from Product s where true AND s.price > minPrice
         }
-        if (maxScore != null) {
-            spec = spec.and(ProductSpecifications.scoreLessThanOrEqualsThan(maxScore));
+        if (maxPrice != null) {
+            spec = spec.and(ProductSpecifications.scoreLessThanOrEqualsThan(maxPrice));
+            // select s from Product s where true AND s.price > minPrice AND s.price < maxPrice
         }
         if (partName != null) {
             spec = spec.and(ProductSpecifications.nameLike(partName));
+            // select s from Product s where true AND s.price > minPrice AND s.name LIKE %partName%
         }
 
         return productRepository.findAll(spec, PageRequest.of(page - 1, 5));
@@ -52,9 +56,5 @@ public class ProductService {
     public  List<Product>findPriceMinMax(Double min, Double max){
         return productRepository.findAllByPriceBetween(min, max);
     }
-
-
-
-
 
 }

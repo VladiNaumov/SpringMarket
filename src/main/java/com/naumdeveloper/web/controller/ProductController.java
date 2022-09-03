@@ -18,26 +18,20 @@ public class ProductController {
 
 
 
-    @GetMapping
+    @GetMapping("/market")
     public Page<Product> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
-            @RequestParam(name = "min_price", required = false) Integer minScore,
-            @RequestParam(name = "max_price", required = false) Integer maxScore,
+            @RequestParam(name = "min_price", required = false) Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice,
             @RequestParam(name = "name_part", required = false) String namePart
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productService.find(minScore, maxScore, namePart, page);
+        return productService.find(minPrice, maxPrice, namePart, page);
 
     }
 
-
-
-    @GetMapping("/market")
-    public List<Product> getAllProdukts() {
-        return productService.getAllProdukts();
-    }
 
     @PostMapping("/market")
     public void addNewProduct(@RequestBody Product product) {

@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpecificationExecutor<Product> {
 
+
     // @Query("select s from Product s where s.Price between ?1 and ?2")
     List<Product> findAllByPriceBetween(Double min, Double max);
 
