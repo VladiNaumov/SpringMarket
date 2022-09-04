@@ -16,8 +16,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-
-
     @GetMapping("/market")
     public Page<Product> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
@@ -32,25 +30,23 @@ public class ProductController {
 
     }
 
-
-    @PostMapping("/market")
-    public void addNewProduct(@RequestBody Product product) {
-        productService.productServiceSave(product);
-    }
-
-
-    @GetMapping("/market/ptodots_between")
-    public List<Product> findSProdoctsByPriceBetween(@RequestParam(defaultValue = "0") Double min, @RequestParam(defaultValue = "100") Double max) {
-        return productService.findPriceMinMax(min, max);
-    }
-
-
-    @GetMapping("/market/findId/{id}")
+    @GetMapping("/{id}")
     public Product finfId(@PathVariable Long id){
         return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
     }
 
-    @GetMapping("/market/delete/{id}")
+    @PostMapping()
+    public Product addNewProduct(@RequestBody Product product) {
+        product.setId(null);
+        return productService.productServiceSave(product);
+    }
+
+    @PutMapping()
+    public Product updateProduct(@RequestBody Product product) {
+        return productService.productServiceSave(product);
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
     }

@@ -37,9 +37,6 @@ public class ProductService {
 
         return productRepository.findAll(spec, PageRequest.of(page - 1, 5));
     }
-    public List<Product> getAllProdukts() {
-        return productRepository.findAll();
-    }
 
     public Optional<Product> finfById(Long id){
         return productRepository.findById(id);
@@ -49,8 +46,8 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void productServiceSave(Product product) {
-        productRepository.save(product);
+    public Product productServiceSave(Product product) {
+        return productRepository.save(product);
     }
 
     public  List<Product>findPriceMinMax(Double min, Double max){
