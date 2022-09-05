@@ -6,8 +6,6 @@ import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class ProductController {
     private final ProductService productService;
@@ -51,11 +49,5 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-
-    // GET http://localhost:8189/app/hello?a=10&b=20
-    @GetMapping("/summa")
-    public Integer helloWork(@RequestParam Integer a, @RequestParam Integer b) {
-        return  a + b ;
-    }
 
 }
