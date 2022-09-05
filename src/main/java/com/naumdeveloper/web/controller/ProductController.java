@@ -33,16 +33,7 @@ public class ProductController {
         return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
     }
 
-    @PostMapping()
-    public Product addNewProduct(@RequestBody Product product) {
-        product.setId(null);
-        return productService.productServiceSave(product);
-    }
 
-    @PutMapping()
-    public Product updateProduct(@RequestBody Product product) {
-        return productService.productServiceSave(product);
-    }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
