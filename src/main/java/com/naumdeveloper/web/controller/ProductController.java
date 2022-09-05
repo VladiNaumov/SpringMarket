@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/market")
 public class ProductController {
     private final ProductService productService;
 
@@ -14,7 +15,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/market")
+    @GetMapping()
     public Page<Product> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
             @RequestParam(name = "min_price", required = false) Integer minPrice,

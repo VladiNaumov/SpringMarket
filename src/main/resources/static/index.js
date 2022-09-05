@@ -3,35 +3,29 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
     // console.log(123);
 
-    $scope.loadProduct = function () {
-        $http.get(contextPath + '/market')
-            .then(function (response) {
-            // console.log(response.data)
-                $scope.ProductList = response.data;
-            });
+ $scope.loadProduct = function (pageIndex = 1){
+   $http({
+           url: contextPath + '/market',
+            method: 'GET',
+                params: {
+                        name_part: $scope.filter ? $scope.filter.name_part : null,
+                        min_price: $scope.filter ? $scope.filter.min_price : null,
+                        max_price: $scope.filter ? $scope.filter.max_price : null
+                }
+                }).then(function (response) {
+                       // console.log(response.data)
+                        $scope.ProductList = response.data.content;
+           });
     };
 
 
     $scope.deleteProduct = function (productId) {
-        $http.get(contextPath + '/market/delete/' + productId)
+        $http.delete(contextPath + '/market/' + productId)
             .then(function (response) {
+            console.log(response.data)
                $scope.loadProduct();
             });
     }
-
-    $scope.changeScore = function (productId, delta) {
-        $http({
-            url: contextPath + '/market/change_price/',
-            method: 'POST',
-            params: {
-                productId: productId,
-                delta: delta
-            }
-        }).then(function (response) {
-            $scope.loadProduct();
-        });
-    }
-
 
      $scope.createProductJson = function () {
             console.log($scope.newProductJson);
@@ -40,23 +34,6 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                     $scope.loadProduct();
                 });
      }
-
-
-    $scope.sumTwoNumbers = function () {
-        console.log($scope.calcAdd);
-        $http({
-                url: contextPath + '/calc/add',
-                method: 'get',
-                params: {
-                    a: $scope.calcAdd.a,
-                    b: $scope.calcAdd.b
-                }
-        }).then(function (response) {
-                alert('Сумма равна ' + response.data.value);
-                $scope.calcAdd.a = null;
-                $scope.calcAdd.b = null;
-           });
-        }
 
     $scope.loadProduct();
 });
