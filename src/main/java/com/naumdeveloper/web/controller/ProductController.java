@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/market")
 public class ProductController {
     private final ProductService productService;
 
@@ -14,7 +15,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/market")
+    @GetMapping()
     public Page<Product> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
             @RequestParam(name = "min_price", required = false) Integer minPrice,
@@ -35,6 +36,8 @@ public class ProductController {
 
     @PostMapping()
     public Product addNewProduct(@RequestBody Product product) {
+        // мое мнение , если я в теле запроса случайно передем ИД продукта, то могу затереть продукт по данному ид
+       // поэтому я его (NULL) и теперь буду уверен что создается новый продукт
         product.setId(null);
         return productService.productServiceSave(product);
     }
