@@ -1,2 +1,3 @@
 # SpringMarket
-Используется Spring boot RestApi, Hibernate JpaRepository and Angular configuration
+Используется Spring boot RestApi, Hibernate JpaRepository, web.repository.specifications and Pageable,   
+WEB: Angular configuration
