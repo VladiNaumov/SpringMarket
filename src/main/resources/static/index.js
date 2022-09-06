@@ -31,6 +31,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             console.log($scope.newProductJson);
             $http.post(contextPath + '/market', $scope.newProductJson)
                 .then(function (response) {
+                    //console.log($scope.newProductJson);
                     $scope.loadProduct();
                 });
      }

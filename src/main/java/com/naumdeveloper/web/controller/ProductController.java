@@ -25,16 +25,17 @@ public class ProductController {
         if (page < 1) {
             page = 1;
         }
-        return productService.find(minPrice, maxPrice, namePart, page);
+        return productService.findAll(minPrice, maxPrice, namePart, page);
 
     }
 
     @GetMapping("/{id}")
-    public Product finfId(@PathVariable Long id){
+    public Product getProductId(@PathVariable Long id){
         return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
     }
 
     @PostMapping()
+
     public Product addNewProduct(@RequestBody Product product) {
         // мое мнение , если я в теле запроса случайно передем ИД продукта, то могу затереть продукт по данному ид
        // поэтому я его (NULL) и теперь буду уверен что создается новый продукт

@@ -8,18 +8,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public Page<Product> find(Integer minPrice, Integer maxPrice, String partName, Integer page) {
+    public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partName, Integer page) {
         Specification<Product> spec = Specification.where(null);
         // select s from Product s where true
         if (minPrice != null) {
@@ -35,7 +34,7 @@ public class ProductService {
             // select s from Product s where true AND s.price > minPrice AND s.name LIKE %partName%
         }
 
-        return productRepository.findAll(spec, PageRequest.of(page - 1, 5));
+        return productRepository.findAll(spec, PageRequest.of(page - 1, 50));
     }
 
     public Optional<Product> finfById(Long id){
@@ -50,8 +49,5 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public  List<Product>findPriceMinMax(Double min, Double max){
-        return productRepository.findAllByPriceBetween(min, max);
-    }
 
 }
