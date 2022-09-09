@@ -35,7 +35,6 @@ public class ProductController {
     }
 
     @PostMapping()
-
     public Product addNewProduct(@RequestBody Product product) {
         // мое мнение , если я в теле запроса случайно передем ИД продукта, то могу затереть продукт по данному ид
        // поэтому я его (NULL) и теперь буду уверен что создается новый продукт
