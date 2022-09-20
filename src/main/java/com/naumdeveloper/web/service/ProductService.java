@@ -1,8 +1,11 @@
 package com.naumdeveloper.web.service;
 
+import com.naumdeveloper.web.dto.ProductDto;
 import com.naumdeveloper.web.entities.Product;
+import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
 import com.naumdeveloper.web.repository.ProductRepository;
 import com.naumdeveloper.web.repository.specifications.ProductSpecifications;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -45,8 +48,16 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Product productServiceSave(Product product) {
+    public Product save(Product product) {
         return productRepository.save(product);
+    }
+    @Transient
+    public Product update(ProductDto productDto){
+        Product product = productRepository.findById(productDto.getId()).orElseThrow(()->
+                new ResourceNotFoundException("не возможно обновить продукт , не найден в BD, id: " + productDto.getId()));
+        product.setPrice(productDto.getPrice());
+        product.setName(productDto.getName());
+        return product;
     }
 
 

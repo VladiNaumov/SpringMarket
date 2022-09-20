@@ -1,5 +1,7 @@
 package com.naumdeveloper.web.controller;
 
+import com.naumdeveloper.web.converters.ProductConverter;
+import com.naumdeveloper.web.dto.ProductDto;
 import com.naumdeveloper.web.service.ProductService;
 import com.naumdeveloper.web.entities.Product;
 import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
@@ -7,16 +9,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/market")
+@RequestMapping("/v1/products")
 public class ProductController {
     private final ProductService productService;
+    private final ProductConverter productConverter;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ProductConverter productConverter) {
         this.productService = productService;
+        this.productConverter = productConverter;
     }
-
     @GetMapping()
-    public Page<Product> getAllProducts(
+    public Page<ProductDto> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
             @RequestParam(name = "min_price", required = false) Integer minPrice,
             @RequestParam(name = "max_price", required = false) Integer maxPrice,
@@ -25,26 +28,28 @@ public class ProductController {
         if (page < 1) {
             page = 1;
         }
-        return productService.findAll(minPrice, maxPrice, namePart, page);
+        return productService.findAll(minPrice, maxPrice, namePart, page)
+                .map(productConverter::entityToDto);
 
     }
 
     @GetMapping("/{id}")
-    public Product getProductId(@PathVariable Long id){
-        return productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
+    public ProductDto getProductId(@PathVariable Long id){
+        Product product = productService.finfById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
+        return productConverter.entityToDto(product);
     }
 
     @PostMapping()
-    public Product addNewProduct(@RequestBody Product product) {
-        // мое мнение , если я в теле запроса случайно передем ИД продукта, то могу затереть продукт по данному ид
-       // поэтому я его (NULL) и теперь буду уверен что создается новый продукт
-        product.setId(null);
-        return productService.productServiceSave(product);
+    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
+        Product product = productConverter.dtoToEntity(productDto);
+        product = productService.save(product);
+        return productConverter.entityToDto(product);
     }
 
     @PutMapping()
-    public Product updateProduct(@RequestBody Product product) {
-        return productService.productServiceSave(product);
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        Product product = productService.update(productDto);
+        return productConverter.entityToDto(product);
     }
 
     @DeleteMapping("/{id}")
