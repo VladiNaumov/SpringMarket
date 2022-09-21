@@ -5,6 +5,7 @@ import com.naumdeveloper.web.dto.ProductDto;
 import com.naumdeveloper.web.service.ProductService;
 import com.naumdeveloper.web.entities.Product;
 import com.naumdeveloper.web.exceptions.ResourceNotFoundException;
+import com.naumdeveloper.web.validators.ProductValidator;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,12 @@ public class ProductController {
     private final ProductService productService;
     private final ProductConverter productConverter;
 
-    public ProductController(ProductService productService, ProductConverter productConverter) {
+    private final ProductValidator productValidator;
+
+    public ProductController(ProductService productService, ProductConverter productConverter, ProductValidator productValidator) {
         this.productService = productService;
         this.productConverter = productConverter;
+        this.productValidator = productValidator;
     }
     @GetMapping()
     public Page<ProductDto> getAllProducts(
@@ -41,6 +45,7 @@ public class ProductController {
 
     @PostMapping()
     public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
+        productValidator.validate(productDto);
         Product product = productConverter.dtoToEntity(productDto);
         product = productService.save(product);
         return productConverter.entityToDto(product);
@@ -48,6 +53,7 @@ public class ProductController {
 
     @PutMapping()
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        productValidator.validate(productDto);
         Product product = productService.update(productDto);
         return productConverter.entityToDto(product);
     }
