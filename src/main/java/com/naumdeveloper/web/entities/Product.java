@@ -16,7 +16,23 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "sn")
+    private String sn;
+
     public Product() {
+    }
+
+    public Product(Long id, String name, Double price, String sn) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.sn = sn;
+    }
+
+    public Product(Long id, String name, Double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -41,5 +57,13 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
     }
 }

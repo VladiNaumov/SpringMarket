@@ -3,17 +3,13 @@ package com.naumdeveloper.web.repository;
 import com.naumdeveloper.web.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
 
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpecificationExecutor<Product> {
 
-
+/*
     // @Query("select s from Product s where s.Price between ?1 and ?2")
     List<Product> findAllByPriceBetween(Double min, Double max);
 
@@ -21,7 +17,7 @@ public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpeci
     Optional<Product> findByName(String name);
 
 
-    /* пример выполнения нативных запросов  */
+    // пример выполнения нативных запросов  //
     @Query("select s from Product s where s.price < 20")
     List<Product> findLowRatingProduct();
 
@@ -31,6 +27,6 @@ public interface ProductRepository extends JpaRepository<Product,Long>, JpaSpeci
     @Query(value = "select price from product where name = :name", nativeQuery = true)
     Integer nativeSqlGetScoreByName(String name);
 
-
+*/
 
 }
